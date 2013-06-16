@@ -1,0 +1,4 @@
+Bienvenue sur ce serveur
+Celui ci tourne à l'aide d'un serveur réalisé avec Node.JS
+Son créateur est BUATHIER Quentin (Quentin01)
+Passez un bon moment ici !
