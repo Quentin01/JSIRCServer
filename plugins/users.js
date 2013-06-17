@@ -14,7 +14,7 @@ UsersPlugin.prototype._initialize = function() {
 
 UsersPlugin.prototype.onNick = function(data) {
 	var nick = data.line.split(' ')[1];
-
+	
 	if(nick == undefined) {
 		this._server.sendServerData(data.user, this._codes.ERR_NEEDMOREPARAMS, "Not enough parameters");
 		return;
@@ -23,11 +23,13 @@ UsersPlugin.prototype.onNick = function(data) {
 		return;
 	}
 
-	this._server.users[data.user].nick = nick;
+	this._server.sendData(data.user, 'NICK ' + nick, 'client', data.user);
 
 	for(var i in this._server.users[data.user].channels) {
 		this._server.broadcastOnChannel(this._server.users[data.user].channels[i], 'NICK ' + nick, [], 'client', data.user);
 	}
+
+	this._server.users[data.user].nick = nick;
 
 	if(this._server.users[data.user].user !== undefined) {
 		this._server.sendData(data.user, 'PING :' + Date.now(), 'none');
