@@ -26,7 +26,7 @@ UsersPlugin.prototype.onNick = function(data) {
 	this._server.sendData(data.user, 'NICK ' + nick, 'client', data.user);
 
 	for(var i in this._server.users[data.user].channels) {
-		this._server.broadcastOnChannel(this._server.users[data.user].channels[i], 'NICK ' + nick, [], 'client', data.user);
+		this._server.broadcastOnChannel(this._server.users[data.user].channels[i], 'NICK ' + nick, [data.user], 'client', data.user);
 	}
 
 	this._server.users[data.user].nick = nick;
